@@ -3,6 +3,14 @@ import './App.css';
 import { Component } from 'react';
 
 class App extends Component{
+  constructor(){
+    super();
+
+    this.state = {
+      string: 'Hello Hammad Ali'
+    }
+  }
+  
   render() {
     return (
       <div className="App">
@@ -19,6 +27,8 @@ class App extends Component{
           >
             Learn React
           </a>
+          <p>{this.state.string}</p>
+          <button onClick={()=> this.setState({string:'Hey Ali'})}>Click</button>
         </header>
       </div>
     );
