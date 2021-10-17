@@ -24,12 +24,16 @@ class App extends Component{
       <div className="App">
         <CardList name="Shahh ">
           {
-            this.state.monsters.map(monster => <h1 key={monster.id}> {monster.name} </h1>)
+            this.state.monsters.map
+            (
+              monster => <h1 key={monster.id}> {monster.name} </h1>
+            )
           }
         </CardList>
       </div>
     );
   }
+
 }
 
 // functional component
