@@ -1,96 +1,38 @@
-import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import { CardList } from './components/card-list/card-list.component';
+import { Component } from 'react';
+import { CardList } from './components/card-list/card-list.component.jsx'
 
-class App extends React.Component{
-  constructor() {
-    // super helps us with this by calling contructor
+class App extends Component {
+  constructor(){
     super();
     this.state = {
-      // name : 'Hassan Raza'
-      monsters : [
-        // {
-        //   name: 'Kashan',
-        //   id: 5
-        
-        // },
-        // {
-        //   name: 'Hammad',
-        //   id: 15
-        // },
-        // {
-        //   name: 'Hassann',
-        //   id: 25
-        // }
-      ],
+      monsters : [],
       searchField: ''
     }
   }
 
+  //componentDidMount() is invoked immediately after a component is mounted (inserted into the tree). 
+  //Initialization that requires DOM nodes should go here.
   componentDidMount() {
+    //fetch return promise
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
-    .then(users => this.setState({monsters:users}))
-  }
-
+    .then(users => this.setState({monsters: users}))
+    // setState() schedules an update to a  component's state object. When state changes, the component responds by re-rendering.
+  } 
 
   render() {
-    // const  monsters = this.state.monsters;
-    // const searchField = this.state.searchField;   
-    // OR
     const {monsters, searchField} = this.state;
-    const filterMonsters = monsters.filter(
-      monster => monster.name.toLowerCase().includes(searchField.toLowerCase())
-      )
-    return (
-      <div className='App'>
-        <input 
-          type='search' 
-          placeholder='search monsters'
-          // e present synthetic event  
-          onChange={e => this.setState({searchField: e.target.value})}
-        >
+    const filterMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
+    return(
+      <div className = 'App'>
+        <input type = "search" placeholder = "Search Monsters" 
+            onChange={e => this.setState({searchField: e.target.value})}>
         </input>
-        {/* any param given inside custom component will be a prop */}
-        {/* state lives in one place and trickle down as props */}
-        <CardList monsters={filterMonsters}>
-        {/* <CardList monsters={this.state.monsters}> */}
-          {/* props children */}
-          {/* {
-            this.state.monsters.map(monster=>(
-              // key helps react which element has been updated, no need to rerender everything 
-              <h1 key = {monster.id}>
-                {monster.name}
-              </h1>
-            ))
-          } */}
-        </CardList>
-      {/* <button onClick={()=> this.setState({name: 'Hammad Ali Shah'})} >Click me!</button> */}
-      </div>
-    )
+        <CardList monsters = {filterMonsters}/>
+      </div> 
+      )
   }
 }
-
-// function App() {
-//   return (
-//     <div className='App'>
-//       <header className='App-header'>
-//         <img src={logo} className='App-logo' alt='logo' />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className='App-link'
-//           href='https://reactjs.org'
-//           target='_blank'
-//           rel='noopener noreferrer'
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

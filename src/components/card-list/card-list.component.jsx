@@ -9,9 +9,6 @@ export const CardList = props => {
                 props.monsters.map(monster=>(
                 // key helps react which element has been updated, no need to rerender everything 
                     <Card key = {monster.id} monster={monster}/>
-                // <h1 key = {monster.id}>
-                //     {monster.name}
-                // </h1>
                 ))
             }
         </div>
