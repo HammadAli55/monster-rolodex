@@ -1,9 +1,11 @@
+import React from 'react';
+// import logo from './logo.svg';
 import './App.css';
-import { Component } from 'react';
-import { CardList } from './components/card-list/card-list.component.jsx'
+import { CardList } from './components/card-list/card-list.component';
+import { SearchBox } from './search-box/search-box.component';
 
-class App extends Component {
-  constructor(){
+class App extends React.Component{
+  constructor() {
     super();
     this.state = {
       monsters : [],
@@ -11,27 +13,26 @@ class App extends Component {
     }
   }
 
-  //componentDidMount() is invoked immediately after a component is mounted (inserted into the tree). 
-  //Initialization that requires DOM nodes should go here.
   componentDidMount() {
-    //fetch return promise
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
-    .then(users => this.setState({monsters: users}))
-    // setState() schedules an update to a  component's state object. When state changes, the component responds by re-rendering.
-  } 
+    .then(users => this.setState({monsters:users}))
+  }
 
   render() {
     const {monsters, searchField} = this.state;
-    const filterMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
-    return(
+    const filterMonsters = monsters.filter(
+      monster => monster.name.toLowerCase().includes(searchField.toLocaleLowerCase())
+    )
+    return (
       <div className = 'App'>
-        <input type = "search" placeholder = "Search Monsters" 
-            onChange={e => this.setState({searchField: e.target.value})}>
-        </input>
-        <CardList monsters = {filterMonsters}/>
-      </div> 
-      )
+        <SearchBox 
+          placeholder = "Search Monster" 
+          handleChange = {e => this.setState({searchField: e.target.value})}
+        />
+        <CardList monsters={filterMonsters}/>
+      </div>
+    )
   }
 }
 
