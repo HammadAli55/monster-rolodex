@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { CardList } from './components/card-list/card-list.component';
 import { SearchBox } from './search-box/search-box.component';
@@ -19,8 +18,6 @@ class App extends React.Component{
     .then(users => this.setState({monsters:users}))
   }
 
-  // after super() - this.handleChange = this.handleChange.bind(this);
-  // OR
   handleChange = e => {
     this.setState({searchField: e.target.value})
   }
@@ -32,7 +29,7 @@ class App extends React.Component{
     )
     return (
       <div className = 'App'>
-        <h1>Monster Rolodex</h1>
+        <h1>Monsters</h1>
         <SearchBox 
           placeholder = "Search Monster" 
           handleChange = {this.handleChange}
