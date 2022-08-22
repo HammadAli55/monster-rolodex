@@ -16,6 +16,7 @@ class App extends React.Component{
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(users => this.setState({monsters:users}))
+    .catch(err => console.log("JSONplace holder response error:", err))
   }
 
   handleChange = e => {
@@ -25,11 +26,11 @@ class App extends React.Component{
   render() {
     const {monsters, searchField} = this.state;
     const filterMonsters = monsters.filter(
-      monster => monster.name.toLowerCase().includes(searchField.toLocaleLowerCase())
+      monster => monster.name.toLowerCase().includes(searchField.toLowerCase())
     )
     return (
       <div className = 'App'>
-        <h1>Monsters</h1>
+        <h1>Monsters Rolodex</h1>
         <SearchBox 
           placeholder = "Search Monster" 
           handleChange = {this.handleChange}
